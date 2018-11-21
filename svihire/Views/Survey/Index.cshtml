@@ -1,0 +1,90 @@
+﻿@model svihire.Models.TakeSurveyViewModel
+
+@{
+    ViewBag.Title = "Survey";
+}
+
+<input type="hidden" id="invite-id" value="@Model.InviteId" />
+
+<h1 class="center-align title">@Model.SurveyTitle</h1>
+
+@*<h3 class="center-align welcome">Welcome, @Model.RespondentName</h3>*@
+
+<div class="col s4 offset-s4" style="margin-top:50px">
+    @foreach (var question in Model.QuestionsViewModel)
+    {
+        <div class="card card-rounded" question data-question_id="@question.Id">
+            <div class="card-action question-prompt">@question.Question</div>
+
+            @foreach (var response in question.PossibleResponses)
+            {
+                <div class="card-action">
+                    <label>
+                        @*The name on the radio button has no meaning.  It is simply to create a grouping.*@
+                        <input class="response" name="Q_@question.Id" type="radio" value="@response.Id" />
+                        <span>@response.Text</span>
+                    </label>
+                </div>
+            }
+        </div>
+        <br />
+    }
+        <div class="center">
+            <a id="btn-finish" class="waves-effect waves-light btn-large disabled" onclick="finish();">Finish</a>
+        </div>
+</div>
+
+@section scripts{
+<script>
+
+    $(document).on("click", ".card-action", checkSelections);
+
+    function checkSelections() {
+        var questionCount = @Model.QuestionsViewModel.Count;
+        var answeredQs = $("input.response:checked").length;
+        if (answeredQs == questionCount) {
+            $("#btn-finish").removeClass("disabled");
+        }
+    }
+
+    function finish() {
+        var responses = [];
+        var exit = false;
+        $.each($(".card"), function () {
+            var questionValue = {};
+            var questionId = $(this).data('question_id');
+            questionValue.id = questionId;
+
+            var checkedRadio = $(this).find('input:checked');
+            questionValue.ans = -1;
+            if (checkedRadio.length) {
+                questionValue.ans = parseInt(checkedRadio.val());
+            }
+
+            if (questionValue.ans === -1) {
+                alert("Please answer all questions");
+                exit = true;
+                return false;
+            }
+            responses.push(questionValue);
+        });
+
+        if (exit)
+            return;
+
+        var answers = { 'iid': $('#invite-id').val(), 'qs': responses };
+        $.ajax({
+            type: 'POST',
+            dataType: 'text',
+            url: "/survey/save",
+            data: "result=" + JSON.stringify(answers),
+            success: function (data, textStatus) {
+                window.location.href = '/survey/thankyou';
+            }
+        });
+    }
+
+
+
+</script>
+}

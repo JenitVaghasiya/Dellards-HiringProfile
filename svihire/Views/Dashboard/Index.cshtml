@@ -1,0 +1,326 @@
+﻿@model svihire.Models.DashboardViewModel
+@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_Layout_SideNav.cshtml";
+}
+
+@section navitems{
+    <li id="hiring-manager-filter-item" class="active">
+        <div class="collapsible-header active">
+            <i class="material-icons">people</i>Hiring Manager
+        </div>
+        <div class="collapsible-body">
+            @foreach (var manager in Model.Managers)
+            {
+                var defaultChecked = "";
+                var meString = "";
+                if (Model.User != null && manager.Id == Model.User.Id)
+                {
+                    defaultChecked = "checked";
+                    meString = "(me)";
+                }
+                <p>
+                    <input type="checkbox" checked="@defaultChecked" id="manager-@manager.Id" />
+                    <label for="manager-@manager.Id">
+                        @manager.UserName @meString
+                    </label>
+                </p>
+            }
+        </div>
+    </li>
+    <li>
+        <div class="collapsible-header">
+            <i class="material-icons">assignment</i>Position
+        </div>
+        <div class="collapsible-body">
+            @foreach (var position in Model.Positions)
+            {
+                <p>
+                    <input type="checkbox" checked="checked" id="position-@position.Id" />
+                    <label for="position-@position.Id">
+                        @position.SurveyName
+                    </label>
+                </p>
+            }
+        </div>
+    </li>
+    <li>
+        <div class="collapsible-header">
+            <i class="material-icons">location_on</i>Opening
+        </div>
+        <div class="collapsible-body">
+            @*TODO: get distinct list of openings*@
+        </div>
+    </li>
+    <li>
+        <div class="collapsible-header">
+            <i class="material-icons">contact_mail</i>Status
+        </div>
+        <div class="collapsible-body">
+            <p>
+                <label>
+                    <input type="checkbox" />
+                    <span>Open</span>
+                </label>
+            </p>
+            <p>
+                <label>
+                    <input type="checkbox" />
+                    <span>Closed</span>
+                </label>
+            </p>
+            <p>
+                <label>
+                    <input type="checkbox" />
+                    <span>Pending</span>
+                </label>
+            </p>
+            <p>
+                <label>
+                    <input type="checkbox" />
+                    <span>All</span>
+                </label>
+            </p>
+        </div>
+    </li>
+}
+
+<div class="row">
+    <div class="col s6">
+        <a class="btn big-boy modal-trigger" href="#add-candidate-modal">Add New Candidate</a>
+    </div>
+    <div class="col s6">
+        <nav class="svi-search">
+            <div class="nav-wrapper">
+                <form class="search-form">
+                    <div class="input-field">
+                        <input id="search" type="search" required placeholder="Search Candidates...">
+                        <label class="label-icon" for="search">
+                            <i class="material-icons">search</i>
+                        </label>
+                        <i class="material-icons">close</i>
+                    </div>
+                </form>
+            </div>
+        </nav>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col s12">
+        <div class="card">
+            <div class="card-content">
+                <table>
+                    <thead>
+                        <tr>
+                            <td>
+                                First Name
+                            </td>
+                            <td>
+                                Last Name
+                            </td>
+                            <td>
+                                Hiring Manager
+                            </td>
+                            <td>
+                                Position
+                            </td>
+                            <td>
+                                Opening
+                            </td>
+                            <td>
+                                Status
+                            </td>
+                            <td>
+                                Actions
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @{
+
+
+
+                            foreach (var opening in Model.Invites)
+                            {
+                                var managerId = opening.ManagerId;
+                                var meString = "";
+                                if (managerId == Model.User.Id)
+                                {
+                                    meString = "(me)";
+                                }
+                                <tr>
+                                    <td>
+                                        @opening.CandidateFirstName
+                                    </td>
+                                    <td>
+                                        @opening.CandidateLastName
+                                    </td>
+                                    <td>
+                                        @opening.ManagerFirstName @opening.ManagerLastName @meString
+                                    </td>
+                                    <td>
+                                        @opening.SurveyName
+                                    </td>
+                                    <td>
+                                        @opening.Opening
+                                    </td>
+                                    <td></td>
+                                    <td>
+                                        < action button lol >
+                                    </td>
+                                </tr>
+
+                            }
+
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="add-candidate-modal" class="modal add-candidate-modal svi-big-modal">
+    <div class="modal-content">
+        <h4>Add Candidate</h4>
+        <div class="row">
+            <form class="col s12">
+                <div class="row">
+                    <div class="input-field col s6">
+                        <select id="survey-selector">
+                            <option value="" disabled selected>Choose a Position...</option>
+                            @foreach (var positions in Model.Positions)
+                            {
+                                <option value="@positions.Id">@positions.SurveyName</option>
+                            }
+                        </select>
+                        <label>Position</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input placeholder="Opening" type="text" id="autocomplete-input" class="autocomplete">
+                        <label for="autocomplete-input">Opening</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input placeholder="Email Address" id="email" type="text" class="validate emailtho">
+                        <label for="email">Email Address</label>
+                    </div>
+                </div>
+                <div class="row candidate-name-container">
+                    <div class="input-field col s6">
+                        <input placeholder="First Name" id="first_name" type="text" class="validate">
+                        <label for="first_name">First Name</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input placeholder="Last Name" id="last_name" type="text" class="validate">
+                        <label for="last_name">Last Name</label>
+                    </div>
+                </div>
+                <div class="row existing-results hide">
+                    <div class="col s6">
+                        <div>
+                            <i class="material-icons">assignment_turned_in</i>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+            @using (Html.BeginForm("CheckCandidateEmail", "Dashboard", FormMethod.Post, new { id = "CheckCandidateEmailForm" }))
+            {
+                @Html.AntiForgeryToken()
+                <input type="hidden" id="hidSurveyID" value="" />
+            }
+        </div>
+        <div id="preloader_thingy" class="progress hide">
+            <div class="indeterminate"></div>
+        </div>
+        <ul id="hiddenExistingcandidate" class="collection hide"></ul>
+        <div class="existing-results-btn-container hide">
+            <a id="cancel-assign" class="waves-effect btn-flat waves-light btn-large  left">Cancel</a>
+            <a id="assign-button" class="waves-effect waves-light btn-large right">Copy Results to New Opening</a>
+        </div>
+    </div>
+    <div id="add-candidate-footer" class="modal-footer">
+        <a href="#!" class="modal-close waves-effect btn-flat waves-red btn-large">Cancel</a>
+        <a id="add-candidate-btn" href="#!" class="modal-close waves-effect waves-green btn-large">Add Candidate</a>
+    </div>
+</div>
+
+
+@section scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#add-candidate-modal').modal({
+                startingTop: '10%', // Starting top style attribute
+                endingTop: '0%', // Ending top style attribute
+            });
+            $('select').material_select();
+        })
+
+        $(document).on("change", "#survey-selector", function () {
+            var surveyID = $(this).find(":selected").val();
+            if (surveyID != null && surveyID != undefined) {
+                $("#hidSurveyID").val(surveyID);
+            }
+        })
+
+        $(document).on("click", "#cancel-assign", function () {
+            ToggleAddExisting();
+            $("#email").val("");
+        })
+
+        $(document).on("input propertychange paste", "#email", function () {
+            var emailText = $("#email").val();
+            //ajax and see if that is valid email
+            //if yes, halt & bring up stuff for existing people
+            var form = $('#CheckCandidateEmailForm');
+            var token = $('input[name="__RequestVerificationToken"]', form).val();
+            var surveyID = $("#hidSurveyID").val();
+
+
+            var _data = {
+                __RequestVerificationToken: token,
+                email: emailText,
+                surveyID: surveyID
+            }
+
+            $.ajax({
+                type: "post",
+                url: "@Url.Action("CheckCandidateEmail")",
+                data: _data,
+                xhr: function () {
+                    var myXhr = $.ajaxSettings.xhr();
+                    return myXhr;
+                },
+                success: function (response) {
+                    if (response != undefined && response != null && response != "") {
+                        var existingData = $(response);
+                        existingData.appendTo("#hiddenExistingcandidate");
+                        ToggleAddExisting();
+                    }
+                },
+                error: function (result) {
+                    console.log("Ajax call to 'Dashboard/CheckCandidateEmail' failed.");
+                    console.log(result);
+                }
+            });
+        })
+
+        function ToggleAddExisting() {
+            $(".candidate-name-container").toggleClass("hide");
+            $("#hiddenExistingcandidate").toggleClass("hide");
+            $("#add-candidate-footer").toggleClass("hide");
+            $(".existing-results-btn-container").toggleClass("hide");
+        }
+
+        function ListExistingInvites() {
+
+        }
+
+    </script>
+}

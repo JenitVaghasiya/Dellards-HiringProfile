@@ -1,0 +1,650 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="row candidates-container">
+    <div class="col s2 filter-col">
+        <div class="side-nav card">
+            <div class="candidate-card   ">
+                <span class="hide">Good morning, Mike!</span>
+                <img class="logo-img" src="DillardsLogo.png">
+            </div>
+            <div class=" filter-label">Filter Candidates By:</div>
+            <ul class="collapsible expandable filter-collapse">
+                <li class="active">
+                    <div class="collapsible-header">
+                        <i class="material-icons">people</i>Hiring Manager
+                    </div>
+                    <div class="collapsible-body">
+                        <p>
+                            <label>
+                                <input type="checkbox" />
+                                <span>Tim Harmon (me)</span>
+                            </label>
+                        </p>
+                        <p>
+                            <label>
+                                <input type="checkbox" />
+                                <span>Nick Fritsche</span>
+                            </label>
+                        </p>
+                        <p>
+                            <label>
+                                <input type="checkbox" />
+                                <span>Erin Marchese</span>
+                            </label>
+                        </p>
+                        <p>
+                            <label>
+                                <input type="checkbox" />
+                                <span>All Managers</span>
+                            </label>
+                        </p>
+                    </div>
+                </li>
+                <li>
+                    <div class="collapsible-header">
+                        <i class="material-icons">assignment</i>Position
+                    </div>
+                    <div class="collapsible-body">
+                        <p>
+                            <label>
+                                <input type="checkbox" />
+                                <span>Software Developer</span>
+                            </label>
+                        </p>
+                        <p>
+                            <label>
+                                <input type="checkbox" />
+                                <span>Client Solutions</span>
+                            </label>
+                        </p>
+                    </div>
+                </li>
+                <li>
+                    <div class="collapsible-header">
+                        <i class="material-icons">location_on</i>Opening
+                    </div>
+                    <div class="collapsible-body">
+                        <p>
+                            <label>
+                                <input type="checkbox" />
+                                <span>Soft Dev - TX</span>
+                            </label>
+                        </p>
+                        <p>
+                            <label>
+                                <input type="checkbox" />
+                                <span>Soft Dev - AR</span>
+                            </label>
+                        </p>
+                        <p>
+                            <label>
+                                <input type="checkbox" />
+                                <span>Sanitation Engineer</span>
+                            </label>
+                        </p>
+                        <p>
+                            <label>
+                                <input type="checkbox" />
+                                <span>All Positions</span>
+                            </label>
+                        </p>
+                    </div>
+                </li>
+                <li>
+                    <div class="collapsible-header">
+                        <i class="material-icons">contact_mail</i>Status
+                    </div>
+                    <div class="collapsible-body">
+                        <p>
+                            <label>
+                                <input type="checkbox" />
+                                <span>Open</span>
+                            </label>
+                        </p>
+                        <p>
+                            <label>
+                                <input type="checkbox" />
+                                <span>Closed</span>
+                            </label>
+                        </p>
+                        <p>
+                            <label>
+                                <input type="checkbox" />
+                                <span>Pending</span>
+                            </label>
+                        </p>
+                        <p>
+                            <label>
+                                <input type="checkbox" />
+                                <span>All</span>
+                            </label>
+                        </p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="col s10 body-col">
+        <nav class="nav-extended nav-heada">
+            <div class="nav-wrapper">
+                <a href="#" class="brand-logo center">Hiring Profiler</a>
+                <div class="log-out">
+                    <!-- Dropdown Trigger -->
+                    <a class='dropdown-trigger smile-drop' href='#' data-target='user-options'>
+                        <i class="material-icons large account-boi">account_circle</i>
+                        <i class="material-icons large account-smile hide ">sentiment_very_satisfied</i>
+                    </a>
+                    <!-- Dropdown Structure -->
+                    <ul id='user-options' class='dropdown-content'>
+                        <li>
+                            <a href="#!">User Settings</a>
+                        </li>
+                        <li>
+                            <a href="#!">Link to Learner Mobile</a>
+                        </li>
+                        <li class="divider" tabindex="-1"></li>
+                        <li>
+                            <a href="#!">Log Out</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="row inner-margin">
+            <div class="col s4">
+                <!-- Modal Trigger -->
+                <a id="big_add_candidate" class="waves-effect waves-light btn modal-trigger btn-large" href="#modal1">Add Candidate</a>
+                <!-- Modal Structure -->
+                <div id="modal1" class="modal add-candidate-modal regular-modal">
+                    <div class="modal-content">
+                        <h4>Add Candidate</h4>
+                        <div class="row">
+                            <form class="col s12">
+                                <div class="row">
+                                    <div class="input-field col s6">
+                                        <select>
+                                            <option value="" disabled selected>Choose a Position...</option>
+                                            <option value="1">Software Developer</option>
+                                            <option value="2">Client Solutions</option>
+                                            <option value="3">Sales</option>
+                                        </select>
+                                        <label>Position</label>
+                                    </div>
+                                    <div class="input-field col s6">
+                                        <input placeholder="Opening" type="text" id="autocomplete-input" class="autocomplete">
+                                        <label for="autocomplete-input">Opening</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <input placeholder="Email Address" id="email" type="text" class="validate emailtho">
+                                        <label for="email">Email Address</label>
+                                    </div>
+                                </div>
+                                <div class="row candidate-name-container">
+                                    <div class="input-field col s6">
+                                        <input placeholder="First Name" id="first_name" type="text" class="validate">
+                                        <label for="first_name">First Name</label>
+                                    </div>
+                                    <div class="input-field col s6">
+                                        <input placeholder="Last Name" id="last_name" type="text" class="validate">
+                                        <label for="last_name">Last Name</label>
+                                    </div>
+                                </div>
+                                <div class="row existing-results hide">
+                                    <div class="col s6">
+                                        <div>
+                                            <i class="material-icons">assignment_turned_in</i> 7/30/2018
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                        <div id="preloader_thingy" class="progress hide">
+                            <div class="indeterminate"></div>
+                        </div>
+                        <ul id="hiddenExistingcandidate" class="collection hide">
+                            <li class="collection-item">
+                                <img src="images/yuna.jpg" alt="" class="circle">
+                                <!-- <span class="name">Mack Peters</span> -->
+                                <div class="center">
+                                    <span class="title">Mack already has a survey on file for this position.</span>
+                                    <br>
+                                    <span class="title"> Would you like to copy the results to one of your openings?</span>
+                                </div>
+
+                                <table>
+                                    <thead class="ex-candidate-head">
+                                        <tr>
+                                            <td>
+                                                Hiring Manager
+                                            </td>
+                                            <td>
+                                                Opening
+                                            </td>
+                                            <td>
+                                                Status
+                                            </td>
+                                            <td>
+                                                View Results
+                                            </td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                Nick Fritsche
+                                            </td>
+                                            <td>
+                                                Soft Dev - TX
+                                            </td>
+                                            <td>
+                                                Open
+                                            </td>
+                                            <td class="valign-wrapper">
+                                                <i class="material-icons">assignment_turned_in</i> 7/30/2018
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                            </li>
+                        </ul>
+                        <div>
+                            <a id="cancel-assign" class="waves-effect btn-flat waves-light btn-large hide left">Cancel</a>
+                            <a id="assign-button" class="waves-effect waves-light btn-large hide right">Copy Results to New Opening</a>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <a id="add-candidate-btn" href="#!" onclick="M.toast({html: 'Mack was added to Software Dev 2024.'})" class="modal-close waves-effect waves-green btn-large">Add Candidate</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col s4 push-s4">
+                <nav>
+                    <div class="nav-wrapper hp-search">
+                        <form>
+                            <div class="input-field">
+                                <input id="search" type="search" required placeholder="Search Candidates...">
+                                <label class="label-icon" for="search">
+                                    <i class="material-icons">search</i>
+                                </label>
+                                <i class="material-icons">close</i>
+                            </div>
+                        </form>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <div class="main-stuff card">
+            <div class="table-container">
+                <table>
+                    <thead class="filterable">
+                        <tr>
+                            <th>First Name</th>
+                            <th>Last Name </th>
+                            <th>Hiring Manager</th>
+                            <th>Position</th>
+                            <th>Opening</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Sean</td>
+                            <td>Cannon</td>
+                            <td>Tim Harmon (me)</td>
+                            <td>Software Developer</td>
+                            <td>req0102</td>
+                            <td>
+                                <a class='dropdown-trigger valign-wrapper' href='#' data-target='dropdown1'>
+                                    Open
+                                    <i class="material-icons">arrow_drop_down</i>
+                                </a>
+                                <!-- Dropdown Structure -->
+                                <ul id='dropdown1' class='dropdown-content'>
+                                    <li>
+                                        <a href="#!">Hired</a>
+                                    </li>
+                                    <li>
+                                        <a href="#!">Not Hired</a>
+                                    </li>
+                                    <li>
+                                        <a href="#!">Open</a>
+                                    </li>
+                                    <li>
+                                        <a href="#!">Closed</a>
+                                    </li>
+                                </ul>
+                            </td>
+                            <td>
+                                <!-- Dropdown Trigger -->
+                                <a class='dropdown-trigger' href='#' data-target='candidateAction1'>
+                                    <i class="material-icons">more_vert</i>
+                                </a>
+                                <!-- Dropdown Structure -->
+                                <ul id='candidateAction1' class='dropdown-content'>
+                                    <li>
+                                        <a href="#!">
+                                            <i class="material-icons">edit</i>Edit
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#!">
+                                            <i class="material-icons">email</i>Send Reminder
+                                        </a>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Sean</td>
+                            <td>Cannon</td>
+                            <td>Nick Fritsche</td>
+                            <td>Software Developer</td>
+                            <td>req1431 - Dallas,TX</td>
+                            <td>
+                                <a class='dropdown-trigger valign-wrapper' href='#' data-target='dropdown2'>
+                                    Open
+                                    <i class="material-icons">arrow_drop_down</i>
+                                </a>
+                                <!-- Dropdown Structure -->
+                                <ul id='dropdown2' class='dropdown-content'>
+                                    <li>
+                                        <a href="#!">Hired</a>
+                                    </li>
+                                    <li>
+                                        <a href="#!">Not Hired</a>
+                                    </li>
+                                    <li>
+                                        <a href="#!">Open</a>
+                                    </li>
+                                    <li>
+                                        <a href="#!">Closed</a>
+                                    </li>
+                                </ul>
+                            </td>
+                            <td>
+                                <!-- Dropdown Trigger -->
+                                <a class='dropdown-trigger' href='#' data-target='candidateAction2'>
+                                    <i class="material-icons">more_vert</i>
+                                </a>
+                                <!-- Dropdown Structure -->
+                                <ul id='candidateAction2' class='dropdown-content'>
+                                    <li>
+                                        <a href="#!">
+                                            <i class="material-icons">edit</i>Edit
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#!">
+                                            <i class="material-icons">email</i>Send Reminder
+                                        </a>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Suzy</td>
+                            <td>Crazy</td>
+                            <td>Nick Fritsche</td>
+                            <td>Client Solutions</td>
+                            <td>Shift Manager - McAllister, TX</td>
+                            <td>
+                                <a class='dropdown-trigger valign-wrapper' href='#' data-target='dropdown3'>
+                                    Pending
+                                    <i class="material-icons">arrow_drop_down</i>
+                                </a>
+                                <!-- Dropdown Structure -->
+                                <ul id='dropdown3' class='dropdown-content'>
+                                    <li>
+                                        <a href="#!">Hired</a>
+                                    </li>
+                                    <li>
+                                        <a href="#!">Not Hired</a>
+                                    </li>
+                                    <li>
+                                        <a href="#!">Open</a>
+                                    </li>
+                                    <li>
+                                        <a href="#!">Closed</a>
+                                    </li>
+                                </ul>
+                            </td>
+                            <td>
+                                <!-- Dropdown Trigger -->
+                                <a class='dropdown-trigger' href='#' data-target='candidateAction3'>
+                                    <i class="material-icons">more_vert</i>
+                                </a>
+                                <!-- Dropdown Structure -->
+                                <ul id='candidateAction3' class='dropdown-content'>
+                                    <li>
+                                        <a href="#!">
+                                            <i class="material-icons">edit</i>Edit
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#!">
+                                            <i class="material-icons">email</i>Send Reminder
+                                        </a>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Mack</td>
+                            <td>Peters</td>
+                            <td>Nick Fritsche</td>
+                            <td>Software Developer</td>
+                            <td>req 412</td>
+                            <td>
+                                <a class='dropdown-trigger valign-wrapper' href='#' data-target='dropdown4'>
+                                    Pending
+                                    <i class="material-icons">arrow_drop_down</i>
+                                </a>
+                                <!-- Dropdown Structure -->
+                                <ul id='dropdown4' class='dropdown-content'>
+                                    <li>
+                                        <a href="#!">Hired</a>
+                                    </li>
+                                    <li>
+                                        <a href="#!">Not Hired</a>
+                                    </li>
+                                    <li>
+                                        <a href="#!">Open</a>
+                                    </li>
+                                    <li>
+                                        <a href="#!">Closed</a>
+                                    </li>
+                                </ul>
+                            </td>
+                            <td>
+                                <!-- Dropdown Trigger -->
+                                <a class='dropdown-trigger' href='#' data-target='candidateAction4'>
+                                    <i class="material-icons">more_vert</i>
+                                </a>
+                                <!-- Dropdown Structure -->
+                                <ul id='candidateAction4' class='dropdown-content'>
+                                    <li>
+                                        <a href="#!">
+                                            <i class="material-icons">edit</i>Edit
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#!">
+                                            <i class="material-icons">email</i>Send Reminder
+                                        </a>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr id="macksrow" class="hide">
+                            <td>Mack</td>
+                            <td>Peters</td>
+                            <td>Tim Harmon (me)</td>
+                            <td>Software Developer</td>
+                            <td>Soft Dev 2024</td>
+                            <td>
+                                <a class='dropdown-trigger valign-wrapper' href='#' data-target='dropdown5'>
+                                    Open
+                                    <i class="material-icons">arrow_drop_down</i>
+                                </a>
+                                <!-- Dropdown Structure -->
+                                <ul id='dropdown5' class='dropdown-content'>
+                                    <li>
+                                        <a href="#!">Hired</a>
+                                    </li>
+                                    <li>
+                                        <a href="#!">Not Hired</a>
+                                    </li>
+                                    <li>
+                                        <a href="#!">Open</a>
+                                    </li>
+                                    <li>
+                                        <a href="#!">Closed</a>
+                                    </li>
+                                </ul>
+                            </td>
+                            <td>
+                                <!-- Dropdown Trigger -->
+                                <a class='dropdown-trigger' href='#' data-target='candidateAction5'>
+                                    <i class="material-icons">more_vert</i>
+                                </a>
+                                <!-- Dropdown Structure -->
+                                <ul id='candidateAction5' class='dropdown-content'>
+                                    <li>
+                                        <a href="#!">
+                                            <i class="material-icons">edit</i>Edit
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#!">
+                                            <i class="material-icons">email</i>Send Reminder
+                                        </a>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+    $(document).ready(function () {
+        $('.sidenav').sidenav();
+        $(".modal").modal();
+        var navHeight = $(".nav-heada").outerHeight();
+        if (navHeight != undefined && navHeight > 0) {
+            $(".candidate-card").height(navHeight);
+        }
+    });
+
+    $(document).ready(function () {
+        $('select').formSelect();
+    });
+
+    var elem = document.querySelector('.collapsible.expandable');
+    var instance = M.Collapsible.init(elem, {
+        accordion: false
+    });
+
+    $('.dropdown-trigger').dropdown();
+
+    $(document).ready(function () {
+        $('.modal').modal();
+    });
+
+    $(document).ready(function () {
+        $('input.autocomplete').autocomplete({
+            data: {
+                "Position 1": null,
+                "Another One": null,
+                "Soft Dev 2024": 'https://placehold.it/250x250'
+            },
+        });
+    });
+
+    $(document).on("keyup", ".emailtho", function () {
+        var text = $(".emailtho")[0].value;
+        if (text != undefined && text.indexOf("@@") != -1) {
+            $("#preloader_thingy").removeClass("hide");
+            setTimeout(bringUpExistingcandidates, 2000);
+        }
+
+    })
+
+    function bringUpExistingcandidates() {
+        $(".candidate-name-container").addClass("hide");
+        $("#modal1").removeClass("regular-modal").addClass("bigger-modal");
+        $("#preloader_thingy").addClass("hide");
+        $("#add-candidate-btn").addClass("hide");
+        $("#cancel-assign").removeClass("hide");
+        $("#assign-button").removeClass("hide");
+        $("#hiddenExistingcandidate").removeClass("hide");
+
+    }
+
+    $(document).on("click", "#cancel-assign", function () {
+        //reset the modal
+        $("#modal1").find("input").val("");
+        $("#add-candidate-btn").html("Add Candidate");
+        $("#hiddenExistingcandidate").addClass("hide");
+        $("#cancel-assign").addClass("hide");
+        $("#assign-button").addClass("hide");
+        $("#modal1").removeClass("bigger-modal").addClass("regular-modal");
+        $("#add-candidate-btn").removeClass("hide");
+        $(".candidate-name-container").removeClass("hide");
+        $(".existing-results").addClass("hide");
+
+    })
+
+    $(document).on("click", "#assign-button", function () {
+        //close the second modal
+        $("#modal1").removeClass("bigger-modal").addClass("regular-modal");
+        $(".candidate-name-container").removeClass("hide");
+        $("#first_name").val("Mack").addClass("disabled");
+        $("#last_name").val("Peters").addClass("disabled");
+        $("#email").val("mack.peters@sviworld.com").addClass("disabled");
+        $(".existing-results").removeClass("hide");
+
+        $("#hiddenExistingcandidate").addClass("hide");
+        $("#cancel-assign").addClass("hide");
+        $("#assign-button").addClass("hide");
+        $("#add-candidate-btn").html("Add To Position").removeClass("hide");
+        //auto fill, and
+        //allow add candidate to happen
+        //$("#macksrow").removeClass("hide");
+    })
+
+
+    $(document).on("click", "#add-candidate-btn", function () {
+
+        $("#macksrow").removeClass("hide").addClass("just-added");
+
+        setTimeout(function () {
+            $("#macksrow").removeClass("just-added");
+        }, 2000);
+
+
+    })
+
+    $(".smile-drop").hover(
+        function () {
+            $(".account-boi").addClass("hide");
+            $(".account-smile").removeClass("hide");
+        }, function () {
+            $(".account-boi").removeClass("hide");
+            $(".account-smile").addClass("hide");
+        }
+    );
+
+    </script>
+}

@@ -1,0 +1,72 @@
+﻿/*Dashboard styles*/
+.svi-dropdown {
+    width: 250px !important;
+    top: 64px !important;
+}
+.svi-body {
+    padding: 10px;
+    width: calc(100% - 240px);
+    margin-left: 240px;
+}
+
+#svi-side-nav {
+    width: 240px !important;
+}
+
+@media only screen and (max-width: 800px)
+{
+    .svi-body {
+        width:100%
+    }
+
+    #svi-side-nav {
+        display:none;
+    }
+}
+
+.svi-big-modal {
+    width: 60%;
+    max-width: unset !important;
+    max-height: unset !important;
+    height:85% !important;
+}
+
+.svi-big-modal, .modal-content {
+    height: calc(95% - 56px);
+    max-height:90%;
+}
+
+.svi-side-nav-header {
+    height: 64px;
+    border-bottom:1px solid #ddd;
+}
+
+.big-boy {
+    height:64px;
+    line-height:64px;
+}
+
+.svi-search {
+    background-color:#fff;
+}
+/*End Dashboard styles*/
+/*override materialize*/
+.edgy-card {
+    margin: 0px !important;
+}
+
+nav form  {
+    height:100%;
+}
+
+form.search-form .input-field {
+    height:100%;
+}
+
+.btn-flat:hover {
+    background-color: unset !important;
+}
+
+
+/*end override materialize*/
+

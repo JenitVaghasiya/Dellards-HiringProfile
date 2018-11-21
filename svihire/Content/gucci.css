@@ -1,0 +1,151 @@
+html, body {
+    background: #f9f9f9;
+    height: 1000px;
+}
+
+a {
+    color:#444;
+}
+
+
+.side-nav {
+    /* background: #ddd; */
+    height:100%;
+    margin-top: 0px;
+}
+
+.candidate-card {
+    height:67px;
+    position: relative;
+    border-bottom: 1px solid #ddd;
+}
+
+.smile-drop  i{
+    font-size: 42px !important;
+}
+
+.logo-img {
+    height: auto;
+    margin: auto;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding:13%;
+}
+
+.filter-label {
+    padding: 9px 1rem;
+    font-weight: bold;
+    margin-top: 35px;
+}
+
+nav.nav-extended {
+    background-color: #e88ec8 !important;
+}
+
+.filter-collapse {
+    margin-top: 0 !important;
+}
+
+.nav-heada {
+    padding:10px;
+}
+
+#big_add_candidate {
+    margin-top:6%;
+}
+
+.filter-col {
+    /* border-right: 1px solid #ddd; */
+    padding:0 !important;
+    height: 100%;
+}
+
+.body-col {
+    padding: 0 !important;
+}
+
+.main-stuff {
+    margin: 2em .75em !important;
+}
+
+.collapsible {
+    box-shadow: none !important;
+    border-left: none !important;
+    border-right: none !important;
+}
+
+.row.inner-margin {
+    margin: 0 !important;
+}
+
+nav .input-field label.active i {
+    color: #444;
+}
+
+.hp-search {
+    background: #fff;
+    margin-top: 15px;
+}
+
+.log-out {
+    float:right;
+    margin-right:5px;
+}
+
+.candidates-container {
+    margin-top: 10px;
+    height: 100%;
+}
+
+thead.filterable th {
+    text-decoration: underline;
+}
+
+thead.filterable th:hover {
+    cursor: pointer;
+}
+
+.add-candidate-modal {
+    width: 60%;
+    max-width: unset !important;
+    max-height: unset !important;
+    
+}
+
+.just-added {
+    animation: pulse 500ms infinite;
+  }
+  
+  @keyframes pulse {
+    0% {
+      background-color: #DDD;
+    }
+    100% {
+      background-color: #e88ec8;
+    }
+  }
+
+
+.regular-modal{
+    height: 65% !important;
+}
+
+.bigger-modal {
+    height: 85% !important;
+}
+
+.ex-candidate-head {
+    font-weight: bold;
+}
+
+.name {
+    font-size: 18px;
+}
+
+.collapsible-body {
+    padding: 0 1rem;
+}

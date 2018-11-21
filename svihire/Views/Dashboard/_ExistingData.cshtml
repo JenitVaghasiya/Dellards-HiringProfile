@@ -1,0 +1,58 @@
+﻿@using svihire.Models;
+@model List<ExistingSurveyData>
+
+<li class="collection-item">
+    <!-- <span class="name">Mack Peters</span> -->
+    <div class="center">
+        @{
+            var candidateInfo = Model.First();
+            var openingCount = Model.Count();
+            var countText = ((openingCount == 1) ? "opening" : "openings");
+            var surveyCompletedDate = candidateInfo.SurveyCompletionDate;
+        }
+        <span><i class="material-icons">assignment_turned_in</i></span>@surveyCompletedDate
+        <span class="title">@candidateInfo.CandidateFirstName @candidateInfo.CandidateLastName already has a survey on file for this position.</span>
+        <span class="title">The survey on file is being used for @openingCount @countText</span>
+        <br>
+        <span class="title"> Would you like to copy the results to one of your openings?</span>
+    </div>
+
+    <table>
+        <thead class="ex-candidate-head">
+            <tr>
+                <td>
+                    Hiring Manager
+                </td>
+                <td>
+                    Opening
+                </td>
+                <td>
+                    Status
+                </td>
+                <td>
+                    View Results
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var invite in Model)
+            {
+            <tr>
+                <td>
+                    @invite.ManagerFirstName @invite.ManagerLastName
+                </td>
+                <td>
+                    @invite.Opening
+                </td>
+                <td>
+                    STATUS
+                </td>
+                <td>
+                    @invite.SurveyName
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+
+</li>

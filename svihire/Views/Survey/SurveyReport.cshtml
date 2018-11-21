@@ -1,0 +1,192 @@
+﻿
+@{
+    ViewBag.Title = "Survey Report";
+}
+
+<style type="text/css">
+    /*hide side nav on this page only*/
+    #slide-out {
+        display: none !important;
+    }
+
+    body {
+        padding-left: 0px;
+        padding-bottom: 20px;
+    }
+
+    header, main, footer {
+        padding: 0;
+    }
+</style>
+<div class="container card report-container">
+    <h2>@ViewBag.Title.</h2>
+    <div class="row">
+        <div class="col s12">
+            <section id="loginForm">
+                <div class="input-field col s4">
+                    <label class="active">Survey</label>
+                    <select name="surveys" id="surveys">
+                        <option value="" disabled selected>Choose your option</option>
+
+                    </select>
+                </div>
+                <div class="input-field col s4">
+                    <label class="active">Candidate</label>
+                    <select name="candidates" id="candidates">
+                        <option value="">Please select</option>
+                    </select>
+                </div>
+
+                <div class="input-field col s4">
+                    <label class="active">Record Id</label>
+                    <select name="records" id="records">
+                        <option value="">Please select</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="button" id="btnPreview" value="View Report" class="waves-effect waves-light btn-large " onclick="fnPreview()" />
+                    </div>
+                </div>
+                <br />
+
+            </section>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col s12" id="previewReportData">
+        </div>
+    </div>
+</div>
+
+
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
+            <script>
+        $('input:hidden').each(function (index, element) {
+            $(element).appendTo($(element).parent());
+        });
+
+        $(document).ready(function () {
+            
+            $('select').material_select();
+
+            fnGetSurveys();
+            fnGetCandidates();
+            $("#surveys").on('change', (item, i) => {
+                fnGetRecords($("#surveys").val(), $("#candidates").val());
+            });
+
+            $("#candidates").on('change', () => {
+                fnGetRecords($("#surveys").val(), $("#candidates").val());
+            });
+
+            $("#records").on('change', () => {
+                console.log($("#records").val());
+                if ($("#records").val() != "") {
+                    $("#btnPreview").removeClass("disabled");
+                }
+            });
+        });
+
+        function fnPreview() {
+            if ($("#records").val() != "") {
+                $("#previewReportData").html("");
+                // $('#previewReportData').load("Url.Action("Preview", "Survey")?id=" + $("#records").val());
+
+                $.ajax({
+                    type: "get",
+                    url: "@Url.Action("Preview", "Survey")?id=" + $("#records").val(),
+                    success: function (data) {
+                        if (data) {
+                            $('#previewReportData').html(data);
+                        }
+                    },
+                    failure: function (response) {
+                        alert(response.responseText);
+                    },
+                    error: function (response) {
+                        alert(response.responseText);
+                    }
+                });
+            } else {
+                Materialize.toast('Please Select Record Id First!', 4000) 
+            }
+           
+        }
+
+        function fnGetSurveys() {
+             $.ajax({
+                 type: "get",
+                 url: "@Url.Content("~/Survey/GetSurveys")",
+                 contentType: "application/json; charset=utf-8",
+                 dataType: "json",
+                 success: function (data) {
+                     if (data) {
+                         $("#surveys").html("");
+                         $("#surveys").append("<option value=''>Please Select</option>");
+                         data.forEach((item, i) => { $("#surveys").append("<option value='" + item.Id + "'>" + item.SurveyName + "</option>"); });
+                         $('select').material_select();
+                    }
+                 },
+                 failure: function (response) {
+                     alert(response.responseText);
+                 },
+                 error: function (response) {
+                     alert(response.responseText);
+                 }
+             });
+        }
+
+        function fnGetCandidates() {
+             $.ajax({
+                 type: "get",
+                 url: "@Url.Content("~/Survey/GetCandidates")",
+                 contentType: "application/json; charset=utf-8",
+                 dataType: "json",
+                 success: function (data) {
+                     if (data) {
+                         $("#candidates").html("");
+                         $("#candidates").append("<option value=''>Please Select</option>");
+                         data.forEach((item, i) => { $("#candidates").append("<option value='" + item.Id + "'>" + item.FirstName + " " + item.LastName + "</option>"); });
+                         $('select').material_select();
+                    }
+                 },
+                 failure: function (response) {
+                     alert(response.responseText);
+                 },
+                 error: function (response) {
+                     alert(response.responseText);
+                 }
+             });
+        }
+
+        function fnGetRecords(surveyId,candidateId) {
+             $.ajax({
+                 type: "get",
+                 url: "@Url.Content("~/Survey/GetRecords")",
+                 contentType: "application/json; charset=utf-8",
+                 dataType: "json",
+                 data: { id: surveyId, candidateId: candidateId},
+                 success: function (data) {
+                     if (data) {
+                         $("#records").html("");
+                         $("#records").append("<option value=''>Please Select</option>");
+                         data.forEach((item, i) => { $("#records").append("<option value='" + item + "'>" + item + "</option>"); });
+                         $('select').material_select();
+                    }
+                 },
+                 failure: function (response) {
+                     alert(response.responseText);
+                 },
+                 error: function (response) {
+                     alert(response.responseText);
+                 }
+             });
+        }
+
+            </script>
+        }
+
